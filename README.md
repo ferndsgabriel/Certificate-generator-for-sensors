@@ -1,73 +1,46 @@
-# React + TypeScript + Vite
+# 📄 IFM Sensor Report Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação em **React + TypeScript + TailwindCSS** desenvolvida para consultar sensores **IFM**, converter valores brutos e gerar relatórios automáticos em **DOCX** e **PDF**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Funcionalidades
 
-## React Compiler
+- 🔌 **Requisição HTTP ao sensor IFM**  
+  Consulta direta ao transmissor para obter parâmetros brutos.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔄 **Conversão de valores**  
+  Conversões utilizadas:
+  - Hex → ASCII  
+  - Hex → Decimal  
+  - Index → Valor / Unidade / Parâmetro  
+  - Adequação de valores conforme padrões IFM
 
-## Expanding the ESLint configuration
+- 📝 **Geração de DOCX automático**  
+  Um template `.docx` é preenchido usando **Docxtemplater** e **PizZip**.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 📑 **Exportação para PDF**  
+  O documento gerado é convertido para PDF automaticamente.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 🎨 **UI com TailwindCSS**  
+  Interface leve, moderna e responsiva.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠️ Tecnologias Utilizadas
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Tecnologia | Finalidade |
+|-----------|------------|
+| **React** | Interface e fluxo da aplicação |
+| **TypeScript** | Tipagem estática e segurança |
+| **TailwindCSS** | Estilização |
+| **Axios** | Requisição ao sensor IFM |
+| **Docxtemplater** | Preenchimento de templates DOCX |
+| **PizZip** | Manipulação interna do DOCX |
+| **FileSaver** | Download de arquivos |
+| **Conversor PDF** | Conversão DOCX → PDF |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 📦 Estrutura Simplificada do Projeto
+
