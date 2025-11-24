@@ -42,5 +42,3 @@ Aplicação em **React + TypeScript + TailwindCSS** desenvolvida para consultar 
 
 ---
 
-## 📦 Estrutura Simplificada do Projeto
-
