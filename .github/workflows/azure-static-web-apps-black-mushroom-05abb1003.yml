@@ -17,35 +17,23 @@ jobs:
     permissions:
        id-token: write
        contents: read
+
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
 
-      # 🔥 CONFIGURAR NODE 20 AQUI (RESOLVE O PROBLEMA)
+      # ✔️ Força Node 20 antes do build
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
-
-      - name: Install Dependencies
+      # ✔️ Instala dependências corretamente
+      - name: Install dependencies
         run: npm ci
 
+      # ✔️ Build manual com Node 20
       - name: Build Vite App
         run: npm run build
-
-      - name: Get Id Token
-        uses: actions/github-script@v6
-        id: idtoken
-        with:
-           script: |
-               const coredemo = require('@actions/core')
-               return await coredemo.getIDToken()
-           result-encoding: string
 
       - name: Build And Deploy
         id: builddeploy
@@ -53,18 +41,5 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_MUSHROOM_05ABB1003 }}
           action: "upload"
-          app_location: "/" 
-          api_location: ""
-          output_location: "dist"
-          github_id_token: ${{ steps.idtoken.outputs.result }}
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          action: "close"
+          app_location: "dist"   # 👈 dist vira a raiz do deploy
+          skip_app_build: true    # 👈 DESATIVA ORYX BUILD (NODE 18)
