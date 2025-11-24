@@ -21,17 +21,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # ✔️ Força Node 20 antes do build
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # ✔️ Instala dependências corretamente
       - name: Install dependencies
         run: npm ci
 
-      # ✔️ Build manual com Node 20
       - name: Build Vite App
         run: npm run build
 
@@ -41,5 +38,6 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "upload"
-          app_location: "dist"   # 👈 dist vira a raiz do deploy
-          skip_app_build: true    # 👈 DESATIVA ORYX BUILD (NODE 18)
+          app_location: "/"               # ✔️ raiz do projeto
+          app_artifact_location: "dist"   # ✔️ pasta gerada pelo build
+          skip_app_build: true            # ✔️ não rodar oryx
